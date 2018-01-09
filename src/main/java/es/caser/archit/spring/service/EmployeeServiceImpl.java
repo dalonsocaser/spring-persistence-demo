@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	@Override
 	@Transactional(readOnly=true)
 	public Employee getByAlias(String alias) {		
-		return employeeDAo.readEmployeeByAlias(alias);
+		return employeeDAo.findEmployeeWithCustomQuery(alias);
 	}
 
 }
