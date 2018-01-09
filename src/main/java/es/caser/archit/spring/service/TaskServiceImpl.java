@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.caser.archit.spring.dao.ITaskDAO;
 import es.caser.archit.spring.model.Task;
+import es.caser.archit.spring.repository.TaskRepository;
 @Service
 public class TaskServiceImpl implements ITaskService{
 	
-	private ITaskDAO taskDAO;
+	private TaskRepository taskDAO;
 	@Autowired
-	public TaskServiceImpl(ITaskDAO taskDAO) {
+	public TaskServiceImpl(TaskRepository taskDAO) {
 		super();
 		this.taskDAO = taskDAO;
 	}
@@ -22,20 +22,20 @@ public class TaskServiceImpl implements ITaskService{
 	@Transactional(readOnly=true)
 	public List<Task> getAll() {
 		
-		return taskDAO.getAll();
+		return taskDAO.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public Task getById(Long key) {
 		
-		return taskDAO.getById(key);
+		return taskDAO.findOne(key);
 	}
 
 	@Override
 	@Transactional
 	public Task add(Task element) {
-		taskDAO.add(element);
+		taskDAO.save(element);
 		return element;
 	}
 
@@ -43,7 +43,7 @@ public class TaskServiceImpl implements ITaskService{
 	@Transactional
 	public void update(Task element) {
 	
-		taskDAO.update(element);
+		taskDAO.save(element);
 	}
 
 	@Override

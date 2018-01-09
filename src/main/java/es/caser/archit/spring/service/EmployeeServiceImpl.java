@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.caser.archit.spring.dao.IEmployeeDAO;
 import es.caser.archit.spring.model.Employee;
+import es.caser.archit.spring.repository.EmployeeRepository;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService{
 	
-	private IEmployeeDAO employeeDAo;
+	private EmployeeRepository employeeDAo;
 	@Autowired
-	public EmployeeServiceImpl(IEmployeeDAO employeeDAo) {
+	public EmployeeServiceImpl(EmployeeRepository employeeDAo) {
 		super();
 		this.employeeDAo = employeeDAo;
 	}
@@ -23,20 +23,20 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	@Transactional(readOnly=true)
 	public List<Employee> getAll() {
 		
-		return employeeDAo.getAll();
+		return employeeDAo.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public Employee getById(Long key) {
 		
-		return employeeDAo.getById(key);
+		return employeeDAo.findOne(key);
 	}
 
 	@Override
 	@Transactional
 	public Employee add(Employee element) {
-		employeeDAo.add(element);
+		employeeDAo.save(element);
 		return element;
 	}
 
@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	@Transactional
 	public void update(Employee element) {
 	
-		employeeDAo.update(element);
+		employeeDAo.save(element);
 	}
 
 	@Override
