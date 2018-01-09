@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import es.caser.archit.spring.model.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
-
+	public Employee readEmployeeByAlias(String alias);
 }

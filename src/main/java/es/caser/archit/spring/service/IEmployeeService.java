@@ -4,4 +4,6 @@ import es.caser.archit.spring.model.Employee;
 
 public interface IEmployeeService extends ICrudService<Long, Employee> {
 
+	Employee getByAlias(String alias);
+
 }

@@ -54,4 +54,10 @@ public class EmployeeServiceImpl implements IEmployeeService{
 		employeeDAo.delete(key);
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public Employee getByAlias(String alias) {		
+		return employeeDAo.readEmployeeByAlias(alias);
+	}
+
 }

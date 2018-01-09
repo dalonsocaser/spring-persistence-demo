@@ -22,9 +22,9 @@ public class EmployeeController {
 	@Autowired
 	private IEmployeeService employeeService;
 
-	@GetMapping("/{id}")
-	public Employee getById(@PathVariable("id") Long id) {
-		Employee article = employeeService.getById(id);
+	@GetMapping("/{alias}")
+	public Employee getById(@PathVariable("alias") String alias) {
+		Employee article = employeeService.getByAlias(alias);
 		return article;
 	}
 
